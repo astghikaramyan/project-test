@@ -1,0 +1,8 @@
+DO
+$$
+BEGIN
+    IF NOT EXISTS (SELECT FROM pg_database WHERE datname='SONG_DB') THEN
+        EXECUTE 'CREATE DATABASE SONG_DB';
+END IF;
+END
+$$;

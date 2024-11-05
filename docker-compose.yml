@@ -1,0 +1,40 @@
+services:
+  resource_db:
+    image: postgres:17-alpine
+    container_name: resource_postgres_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${RESOURCE_DB}
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./init-scripts/resource-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init-scripts/resource-db/create-table-init.sql:/docker-entrypoint-initdb.d/create-table-init.sql
+
+  song_db:
+    image: postgres:17-alpine
+    container_name: song_postgres_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${SONG_DB}
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./init-scripts/resource-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init-scripts/resource-db/create-table-init.sql:/docker-entrypoint-initdb.d/create-table-init.sql
+
+  resource:
+    build:
+      context: ./resource-service
+      dockerfile: Dockerfile
+    ports:
+     - "8080:8080"
+
+  song:
+    build:
+      context: ./song-service
+      dockerfile: Dockerfile
+    ports:
+     - "8081:8081"
