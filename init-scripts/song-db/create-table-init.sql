@@ -5,5 +5,5 @@ CREATE TABLE IF NOT EXISTS song(
     album VARCHAR(255) NOT NULL,
     length VARCHAR(255) NOT NULL,
     year VARCHAR(255) NOT NULL,
-    resourceId INTEGER NOT NULL
+    resource_id INTEGER NOT NULL
 );

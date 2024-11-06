@@ -29,7 +29,7 @@ public class SongEntity {
     private String year;
 
     @NonNull
-    @Column(name = "resourceId")
+    @Column(name = "resource_id")
     private Integer resourceId;
 
     public Integer getId() {

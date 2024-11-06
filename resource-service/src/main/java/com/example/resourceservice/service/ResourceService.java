@@ -30,7 +30,7 @@ public class ResourceService {
 
     public ResourceEntity createResource(final byte[] audioData) throws IOException, TikaException, SAXException {
         ResourceEntity resource = new ResourceEntity();
-        resource.setData(BlobProxy.generateProxy(audioData));
+        resource.setData(audioData);
         resource = this.repository.save(resource);
         SongMetadata songMetadata = getFileMetadata(audioData);
         songMetadata.setResourceId(resource.getId());

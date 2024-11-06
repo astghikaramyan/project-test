@@ -37,22 +37,7 @@ public class ResourceRestController {
     public ResponseEntity<byte[]> getResource(@PathVariable Integer id) {
         try {
             final ResourceEntity resource = resourceService.getResource(id);
-            if (Objects.nonNull(resource)) {
-                final Blob audioData = resource.getData();
-                final byte[] dataInBytes = Optional.ofNullable(audioData)
-                                                   .map(data -> {
-                                                       try {
-                                                           return data.getBytes(1, (int) data.length());
-                                                       } catch (SQLException e) {
-                                                           throw new RuntimeException(e);
-                                                       }
-                                                   })
-                                                   .orElse(null);
-                if (Objects.nonNull(dataInBytes)) {
-                    return ResponseEntity.ok(dataInBytes);
-                }
-            }
-            throw new NotFoundException(String.format("Resource with id %s can not be found", id));
+            return ResponseEntity.ok(resource.getData());
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 

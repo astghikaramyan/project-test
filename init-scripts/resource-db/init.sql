@@ -1,8 +1,0 @@
-DO
-$$
-BEGIN
-    IF NOT EXISTS (SELECT FROM pg_database WHERE datname='RESOURCE_DB') THEN
-        EXECUTE 'CREATE DATABASE RESOURCE_DB';
-    END IF;
-END
-$$;

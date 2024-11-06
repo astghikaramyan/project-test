@@ -2,8 +2,6 @@ package com.example.resourceservice.entity;
 
 import jakarta.persistence.*;
 
-import java.sql.Blob;
-
 @Entity
 @Table(name = "resource")
 public class ResourceEntity {
@@ -11,9 +9,8 @@ public class ResourceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Lob
     @Column(name = "data")
-    private Blob data;
+    private byte[] data;
 
     public Integer getId() {
         return id;
@@ -23,11 +20,11 @@ public class ResourceEntity {
         this.id = id;
     }
 
-    public Blob getData() {
+    public byte[] getData() {
         return data;
     }
 
-    public void setData(final Blob data) {
+    public void setData(final byte[] data) {
         this.data = data;
     }
 }
